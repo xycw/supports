@@ -524,9 +524,9 @@ if($entry['orders_products_remark_count']){ $yidinghuo = true; foreach($entry['o
 
                       <p class="help-block">程序将根据文件的扩展名来判断是哪个通道支付接口表。</p>
 
-                      <p class="help-block">请按照<a href="/supports/Public/example/example_payment_confirmation.xls" target="__blank">example_payment_confirmation.xls</a>标准格式导入!</p>
+                      <p class="help-block">请按照<a href="/supportsGit/Public/example/example_payment_confirmation.xls" target="__blank">example_payment_confirmation.xls</a>标准格式导入!</p>
 
-                      <p class="help-block">请按照<a href="/supports/Public/example/stripe_payment.csv" target="__blank">stripe_payment.csv</a>标准格式导入!</p>
+                      <p class="help-block">请按照<a href="/supportsGit/Public/example/stripe_payment.csv" target="__blank">stripe_payment.csv</a>标准格式导入!</p>
 
                       <p class="help-block">导入的数据将影响 {待处理}，{付款失败/未付款}，{付款确认中} 等 状态的订单状态，确认后的订单将进入 ｛已确认付款｝状态</p>
 

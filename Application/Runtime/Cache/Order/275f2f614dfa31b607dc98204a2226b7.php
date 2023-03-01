@@ -1,6 +1,6 @@
 <?php if (!defined('THINK_PATH')) exit();?><div class="container">
     <div class="row">
-        <div class="col-lg-1"><img class="img-responsive" alt="zencart站群订单管理系统" src="/supports/Public/Image/App/logo.png"></div>
+        <div class="col-lg-1"><img class="img-responsive" alt="zencart站群订单管理系统" src="/supportsGit/Public/Image/App/logo.png"></div>
         <div class="col-lg-5">
             <p>FORTUNE网络科技工作室 版权所有©<?php echo date('Y') ?></p>
             <p>邮箱:fortune_tech@qq.com</p>

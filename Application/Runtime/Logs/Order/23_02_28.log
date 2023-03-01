@@ -1,0 +1,6 @@
+[ 2023-02-28T11:29:49+08:00 ] ::1 /supports/index.php/Order/Order/list/order_status_remark/%E5%B7%B2%E7%A1%AE%E8%AE%A4%E4%BB%98%E6%AC%BE
+ERR: SQLSTATE[HY000]: General error: 3065 Expression #3 of ORDER BY clause is not in SELECT list, references column 'supportc_supportcustomize.o_r.last_modify' which is not in SELECT list; this is incompatible with DISTINCT
+
+[ 2023-02-28T13:23:30+08:00 ] ::1 /supports/index.php/Order/Order/list
+ERR: SQLSTATE[HY000]: General error: 3065 Expression #3 of ORDER BY clause is not in SELECT list, references column 'supportc_supportcustomize.o_r.last_modify' which is not in SELECT list; this is incompatible with DISTINCT
+

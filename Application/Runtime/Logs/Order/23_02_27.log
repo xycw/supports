@@ -1,0 +1,12 @@
+[ 2023-02-27T10:24:14+08:00 ] ::1 /supports/index.php/Order/Order/list/customer_email/johnfitbit26%40gmail.com
+ERR: SQLSTATE[HY000]: General error: 3065 Expression #3 of ORDER BY clause is not in SELECT list, references column 'supportc_supportcustomize.o_r.last_modify' which is not in SELECT list; this is incompatible with DISTINCT
+
+[ 2023-02-27T13:52:37+08:00 ] ::1 /supports/index.php/Order/Finance/index
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #4 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'supportc_supportcustomize.o_p_r_r.quantity_received' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+
+[ 2023-02-27T14:15:48+08:00 ] ::1 /supports/index.php
+ERR: SQLSTATE[HY000]: General error: 3065 Expression #3 of ORDER BY clause is not in SELECT list, references column 'supportc_supportcustomize.o_r.last_modify' which is not in SELECT list; this is incompatible with DISTINCT
+
+[ 2023-02-27T16:27:34+08:00 ] ::1 /supports/index.php/Order/Order/_order_detail/
+ERR: 非法操作:_order_detail
+

@@ -1,0 +1,255 @@
+<h1><?php echo $form_title ?></h1>
+
+<form action="<?php echo U('Site/Site/edit') ?>" method="post">
+    <input type="hidden" name="site_id" value="<?php echo isset($site_info['site_id'])?$site_info['site_id']:0; ?>">
+    <table class="table table-bordered">
+        <tr>
+            <th>网站类型</th>
+            <td>
+                <select name="type" class="form-control">
+                    <option value="1"<?php if($site_info['type']==1) echo ' selected' ?>>独立站</option>
+                    <option value="10"<?php if($site_info['type']==10) echo ' selected' ?>>平台站</option>
+                </select>
+            </td>
+        </tr>            
+        <tr>
+            <th>域名</th><td><input class="form-control" type="text" name="site_name" placeholder="demo.com(不带www)" value="<?php echo isset($site_info['site_name'])?$site_info['site_name']:''; ?>"></td>
+        </tr>    
+        <tr>
+            <th>订单前缀</th><td><input class="form-control" type="text" name="order_no_prefix" placeholder="请用纯英文字符" value="<?php echo isset($site_info['order_no_prefix'])?$site_info['order_no_prefix']:''; ?>"></td>
+        </tr>
+        <tr>            
+            <th>网站首页</th><td><input class="form-control" type="text" name="site_index" placeholder="http://www.demo.com(不带https)" value="<?php echo isset($site_info['site_index'])?$site_info['site_index']:'http://www.'; ?>"></td>
+        </tr>
+        <tr>
+            <th>备用域名</th><td><input class="form-control" type="text" name="site_index_spare" placeholder="http://www.demo2.com(不带https)" value="<?php echo isset($site_info['site_index_spare'])?$site_info['site_index_spare']:''; ?>"></td>
+        </tr>     
+        <tr>
+            <th>客服名称</th><td><input class="form-control" type="text" name="customer_service_name" placeholder="客服名称" value="<?php echo isset($site_info['customer_service_name'])?$site_info['customer_service_name']:'Kimmy'; ?>"></td>
+        </tr>         
+        <tr>            
+            <th>图片URL</th><td><input class="form-control" type="text" name="img_url" placeholder="http://www.demo.com/images/" value="<?php echo isset($site_info['img_url'])?$site_info['img_url']:'http://support.customize.company/images/saas/'; ?>"></td>
+        </tr>
+        <tr>            
+            <th>接口</th><td><input class="form-control" type="text" name="site_interface" placeholder="http://www.demo.com/interface-name/" value="<?php echo isset($site_info['site_interface'])?$site_info['site_interface']:'https://wholesale.jerseyslovery.com/api_v1_orders/get'; ?>"></td>
+        </tr>
+        <tr>            
+            <th>备注</th><td><textarea class="form-control" name="remark"><?php echo isset($site_info['remark'])?$site_info['remark']:''; ?></textarea></td>
+        </tr>
+        <tr>
+             <th>域名过期</th><td><input class="form-control" type="text" name="date_expired" placeholder="域名过期日期" value="<?php echo isset($site_info['date_expired'])?$site_info['date_expired']:''; ?>"></td>
+        </tr>
+         <tr>
+             <th>SSL过期</th><td><input class="form-control" type="text" name="ssl_expired" placeholder="SSL过期日期" value="<?php echo isset($site_info['ssl_expired'])?$site_info['ssl_expired']:''; ?>"></td>
+        </tr>
+        <tr>
+             <th>邮箱</th>
+            <td>
+                <table class="table table-bordered">
+                    <tr><th>账号</th><th>密码</th><th>SMTP域名</th><th>SMTP端口</th></tr>
+                    <?php
+                    if(isset($email_data) && sizeof($email_data)){
+                        foreach($email_data as $entry){
+                    ?>
+                    <tr>
+                        <td><input type="text" class="form-control" name="email_address[]" value="<?php echo $entry['address']?>"></td>
+                        <td><input type="text" class="form-control" name="email_password[]" value="<?php echo $entry['password']?>"></td>
+                        <td><input type="text" class="form-control" name="email_smtp[]" value="<?php echo $entry['smtp']?>"></td>
+                        <td><input type="text" class="form-control" name="email_port[]" value="<?php echo $entry['port']?>"></td>
+                    </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                    <tr>
+                        <td><input type="text" class="form-control" name="email_address[]" value="jerseysonlineservice09@gmail.com"></td>
+                        <td><input type="text" class="form-control" name="email_password[]" value="fdumobztnjaifkju"></td>
+                        <td><input type="text" class="form-control" name="email_smtp[]" value="smtp.gmail.com"></td>
+                        <td><input type="text" class="form-control" name="email_port[]" value="587"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      <tr>
+             <th>零售还是批发</th><td>
+        
+             	<label>
+              <input type="radio" name="is_sale" value="0" <?php echo (($site_info['is_sale']?:0)==0) ? 'checked="checked"' : ''; ?>/>
+              <span>零售</span>
+              </label>
+              &nbsp;&nbsp;
+              <label>
+              <input type="radio" name="is_sale" value="1" <?php echo (($site_info['is_sale']?:0)==1) ? 'checked="checked"' : '';?>/>
+              <span>批发</span>
+              </label>
+              &nbsp;&nbsp;
+              </label>
+              <input type="radio" name="is_sale" value="2" <?php echo (($site_info['is_sale']?:0)==2) ? 'checked="checked"' : '';?>/>
+              <span>批发301</span>
+              </label>
+              &nbsp;&nbsp;
+              </label>
+              <input type="radio" name="is_sale" value="3" <?php echo (($site_info['is_sale']?:0)==3) ? 'checked="checked"' : '';?>/>
+              <span>批发OFF</span>
+              </label>
+              &nbsp;&nbsp;
+              </label>
+              <input type="radio" name="is_sale" value="4" <?php echo (($site_info['is_sale']?:0)==4) ? 'checked="checked"' : '';?>/>
+              <span>零售301</span>
+              </label>
+              &nbsp;&nbsp;
+              </label>
+              <input type="radio" name="is_sale" value="5" <?php echo (($site_info['is_sale']?:0)==5) ? 'checked="checked"' : '';?>/>
+              <span>零售OFF</span>
+              </label>
+              &nbsp;&nbsp;
+              </label>
+              <input type="radio" name="is_sale" value="-1" <?php echo (($site_info['is_sale']?:0)=='-1') ? 'checked="checked"' : '';?>/>
+              <span>批发0不清缓存</span>
+              </label>
+             </td>
+        </tr>
+         <tr>
+             <th>权限路径</th><td>
+        
+              <select class="form-control" name="system_weburl">
+                 <?php echo $system_weburl;?>
+              </select>
+             </td>
+        </tr>
+         <tr>
+             <th>权限用户</th><td>
+        
+              <select class="form-control" name="system_weblogin">
+                 <?php echo $system_weblogin;?>
+              </select>
+             </td>
+        </tr>
+        <tr>            
+            <th>权限密码</th><td><input class="form-control" type="text" name="system_webpass" placeholder="权限密码" value="<?php echo isset($site_info['system_webpass'])?$site_info['system_webpass']:''; ?>"></td>
+        </tr>
+        <tr>
+             <th>FACEBOOK广告类型</th><td>
+        
+              <select class="form-control" name="system_fbadtype">
+                 <?php echo $system_fbadtype;?>
+              </select>
+             </td>
+        </tr>
+       <tr>
+             <th>ZWB[中外宝]</th><td>
+        
+             	<select class="form-control" name="system_zwb">
+             		 <?php echo $system_zwb;?>
+             	</select>
+             </td>
+        </tr>
+        <tr>
+             <th>RXH[融信汇]</th><td>
+        
+              <select class="form-control" name="system_rxh">
+                 <?php echo $system_rxh;?>
+              </select>
+             </td>
+        </tr>
+       <tr>
+             <th>CMS[网站]</th><td>
+        
+             	<select class="form-control" name="system_cms">
+             		 <?php echo $system_cms;?>
+             	</select>
+             </td>
+        </tr>
+      <tr>
+             <th>订单归属</th><td>
+        
+             	<select class="form-control" name="system_area">
+             		<?php echo $system_area;?>
+             	</select>
+             </td>
+        </tr>
+      <tr>
+             <th>品牌</th><td>
+        
+             	<select class="form-control" name="system_brand">
+             		<?php echo $system_brand;?>
+             	</select>
+             </td>
+        </tr>
+      	<tr>
+             <th>部门归属</th><td>
+        
+             	<select class="form-control" name="system_depart">
+             		<?php echo $system_depart;?>
+             	</select>
+             </td>
+        </tr>
+      	<tr>
+             <th>推广员</th><td>
+                <tagLib name="html" />
+                <html:select options="data_user_tuiguang" name="tuiguang_user_id" selected="tuiguang_user_id" style="form-control" first="--推广员--" />
+             </td>
+        </tr>
+      	<tr>
+             <th>域名代理商URL</th>
+            <td>
+                <table class="table table-bordered">
+                    <tr><th>域名代理商URL</th><th>域名代理管理账号</th><th>域名代理管理邮箱</th></tr>
+
+                    <tr>
+                        <td>
+                        	 <select class="form-control" name="system_url">
+			             		<?php echo $system_url;?>
+			             	</select>
+                        </td>
+                        <td><input type="text" class="form-control" name="system_url_username" value="<?php echo $system_url_block['system_url_username']?>"></td>
+                        <td><input type="text" class="form-control" name="system_url_email" value="<?php echo $system_url_block['system_url_email'];?>"></td>
+
+                    </tr>
+                </table>
+            </td>
+
+      
+        </tr>
+      	<tr>
+             <th>第三方DNS官网</th>
+            <td>
+                <table class="table table-bordered">
+                    <tr><th>第三方DNS官网</th><th>第三方DNS</th><th>第三方DNS管理账号</th><th>第三方DNS管理邮箱</th></tr>
+
+                    <tr>
+                        <td>
+                        	 <select class="form-control" name="system_thirdgw">
+			             		<?php echo $system_thirdgw;?>
+			             	</select>
+                        </td>
+                        <td>
+                        	<table>
+                        		<tr><th>dns1</th><td><input type="text" class="form-control" name="email_dns[]" value="<?php echo $system_dns_block['email_dns'][0];?>"></td></tr>
+                        		<tr><th>dns2</th><td><input type="text" class="form-control" name="email_dns[]" value="<?php echo $system_dns_block['email_dns'][1];?>"></td></tr>
+                        		<tr><th>dns3</th><td><input type="text" class="form-control" name="email_dns[]" value="<?php echo $system_dns_block['email_dns'][2];?>"></td></tr>
+                        		<tr><th>dns4</th><td><input type="text" class="form-control" name="email_dns[]" value="<?php echo $system_dns_block['email_dns'][3];?>"></td></tr>
+                        	</table>
+
+                        </td>
+                        <td><input type="text" class="form-control" name="system_dns_username" value="<?php echo $system_dns_block['system_dns_username'];?>"></td>
+                        <td><input type="text" class="form-control" name="system_dns_email" value="<?php echo $system_dns_block['system_dns_email'];?>"></td>
+
+                    </tr>
+                </table>
+            </td>
+
+      
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center"><a class="btn btn-default" href="<?php echo U('Site/Site/list') ?>">返回</a>&nbsp;&nbsp;
+<button class="btn btn-default" type="submit">保存</button></td>
+        </tr>
+    </table>	
+</form>
+
+
+<script>
+    $("input[name='date_expired']").datetimepicker({format: 'yyyy-mm-dd', 'autoclose': true, 'startView': 2, 'minView': 'month', 'language': 'zh-CN'});
+    $("input[name='ssl_expired']").datetimepicker({format: 'yyyy-mm-dd', 'autoclose': true, 'startView': 2, 'minView': 'month', 'language': 'zh-CN'});
+</script>

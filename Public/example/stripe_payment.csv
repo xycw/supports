@@ -1,0 +1,2 @@
+id,Description,Seller Message,Created (UTC),Amount,Amount Refunded,Currency,Converted Amount,Converted Amount Refunded,Fee,Tax,Converted Currency,Status,Statement Descriptor,Customer ID,Customer Description,Customer Email,Captured,Card ID,Invoice ID,Transfer,rand_order_id
+ch_1ECgzWDreDDRiK0UlbGA9C3O,aaa@bbs.com,Payment complete.,2019/3/11 5:48,3.25,3.25,usd,25,25,3.2,0,hkd,Paid,,,,,TRUE,card_1ECgzUDreDDRiK0UKhLZfV8P,,,ab2945bbb558871e3316b2b32ba25217

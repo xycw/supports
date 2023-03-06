@@ -148,6 +148,26 @@ $(document).ready(function(){
   </div>
 </div>
 <!-- Modal -->
+<div class="modal fade" id="importInAdvanceModal" >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">预发单号导入</h4>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo U('Order/Purchase/importInAdvanceModal') ?>" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <label>文件导入</label><input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-default">导入</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="importModal" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -236,6 +256,7 @@ $(document).ready(function(){
 <a class="btn btn-default pull-right" href="<?php echo U('Order/Purchase/enterReceipt');?>" style="margin-left:5px;">录入回单</a>
 <button class="btn btn-default pull-right" type="button" data-toggle="modal" data-target="#importModal" style="margin-left:5px;"><i class="glyphicon glyphicon-import"></i>订货表回单导入</button>
 <button class="btn btn-default pull-right" type="button" data-toggle="modal" data-target="#importLogisticsRemarkModal"><i class="glyphicon glyphicon-import"></i>物流备注导入</button>
+<button class="btn btn-default pull-right" type="button" data-toggle="modal" data-target="#importInAdvanceModal"><i class="glyphicon glyphicon-import"></i>预发单号导入</button>
 
 <form id="form-orders-products" action="<?php echo U('Order/Purchase/archiving') ?>" method="POST" style="margin-top: 10px;">
     <input type="hidden" name="archiving_type">

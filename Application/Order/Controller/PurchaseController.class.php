@@ -1622,7 +1622,74 @@ class PurchaseController extends CommonController {
 
         $this->success('成功导入'.$num.'条数据');
     }
-    
+
+    /**
+     * 预发单号导入
+     * @return void
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     */
+    public function importInAdvanceModalAction()
+    {
+        if (UPLOAD_ERR_OK != $_FILES['file']['error']) {
+            $this->error('表格上传失败!错误码:' . $_FILES['file']['error']);
+        }
+        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        if ($ext != 'xls')
+            $this->error('文件必须是xls格式');
+        $file = $_FILES['file']['tmp_name'];
+        Vendor('PHPExcel.PHPExcel');
+        $php_excel_reader = new \PHPExcel_Reader_Excel5();
+        if (!$php_excel_reader->canRead($file)) {
+            $this->error('无法解析上传的表格!');
+        }
+        $PHPExcel = $php_excel_reader->load($file);
+        $currentSheet = $PHPExcel->getSheet(0);
+        //indvance_no预发单号字段
+        $fileds = array(
+            'A' => array('title' => '订单号', 'key' => 'order_no', 'required' => false),
+            'B' => array('title' => '预发单号', 'key' => 'indvance_no', 'required' => true),
+        );
+        //表格格式验证 start
+        foreach ($fileds as $col => $v) {
+            $title = $currentSheet->getCell($col . '1')->getFormattedValue();
+            $title = trim($title);
+            if (strpos($title, $v['title']) === false) {
+                $this->error('你上传的表格字段[' . $v['title'] . ']缺失!');
+            }
+        }
+        $num = 0;
+        $row = 2;
+        do {
+            $next = true;
+            $data = array();
+            foreach ($fileds as $col => $v) {
+                $value = $currentSheet->getCell($col . $row)->getFormattedValue();
+                $value = trim($value);
+                if ($v['required'] && $value == '') {
+                    $next = false;
+                    break;
+                }
+                $data[$v['key']] = $value;
+
+            }
+            if (!empty($data['indvance_no']) && !empty($data['order_no'])) {
+                $id = M('orders_remark')->where(array('order_no' => $data['order_no']))->save(array('indvance_no' => $data['indvance_no']));
+                if ($id == 0) {
+                    $this->error('导入失败,数据有问题,检查订单或预发订单');
+                }
+                $num++;
+            }
+            if ($num == 0) {
+                $this->error('导入失败,无数据');
+            }
+            if ($next) $row++;
+        } while ($next);
+
+        $this->success('成功导入' . $num . '条数据');
+
+    }
+
     private function _getProductImage($site_id, $orders_producst_id) {
         $row = D('orders_products')->where(array('site_id'=>$site_id,'orders_products_id'=>$orders_producst_id))->field('products_image')->find();
         if(empty($row['products_image'])) {
@@ -1834,7 +1901,7 @@ class PurchaseController extends CommonController {
 		if(!empty($order_no)){
 			if (false!==($zencart_no = parseZencartNo($order_no)) || preg_match('~-~', $order_no)) {
 				if(preg_match('~-~', $order_no)) {
-					$order_info = M('orders_remark')->field('site_id,orders_id')->where(array('order_no'=>$order_no))->find();
+                    $order_info = M('orders_remark')->field('site_id,orders_id,indvance_no')->where(array('order_no'=>$order_no))->find();
 				} else {
 					$order_info = M('Orders')->alias('o')->join(array('LEFT JOIN __SITE__ s ON s.site_id=o.site_id'))->field('o.site_id,o.orders_id')->where(array('s.order_no_prefix' => $zencart_no['orders_prefix'],'o.orders_id' => $zencart_no['orders_id']))->find();
 				}

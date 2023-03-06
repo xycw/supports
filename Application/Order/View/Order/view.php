@@ -82,14 +82,18 @@ for($i=0;$i<$n;$i++){
     <td class="img" <?php if($product['add_from_sys']==1) echo 'style="background:yellow;"'  ?>>
         <img class="pull-left" src="<?php echo trim($product['products_image']); ?>">
         <?php
-        if($action=='view') {
-            if($product['orders_products_remark']['remove']==1) 
-                echo '<p style="padding:5px;color:#fff;background:red;">取消此项目</p>';
+        if ($action == 'view') {
+            if ($product['orders_products_remark']['remove'] == 1)
+                echo '<p style="text-align:center;padding:5px;color:#fff;background:red;">取消此项目</p>';
+            elseif ($product['orders_products_remark']['remove'] == 2) {
+                echo '<p style="text-align:center;padding:5px;color:#fff;background:#4169E1;">已换货</p>';
+            }
         }else{
         ?>
         <select class="form-control" name="orders_products_remark[remove][<?php echo empty($product['orders_products_remark']['orders_products_remark_id'])?$product['site_id'].'-'.$product['orders_products_id']:$product['orders_products_remark']['orders_products_remark_id'] ?>]">
             <option value="0" <?php if($product['orders_products_remark']['remove']==0) echo ' selected'; ?>>正常</option>
             <option value="1" <?php if($product['orders_products_remark']['remove']==1) echo ' selected'; ?>>取消此项目</option>
+            <option value="2" <?php if($product['orders_products_remark']['remove']==2) echo ' selected'; ?>>已换货</option>
         </select>
         <?php
         }
@@ -195,6 +199,8 @@ if($i%2==1){
                     </tr>            
                     <tr><th colspan="2"><button class="btn btn-default btn-block btn-add-attr" type="button">+</button></th></tr>
                 </table>
+                <label>备注:</label>
+                <textarea class="form-control" cols="20" rows="5" name="new_product[memo][0]"></textarea>
             </td>
             </tr>            
         </table>
@@ -250,6 +256,8 @@ if($i%2==1){
                     </tr>   
                     <tr><th colspan="2"><button class="btn btn-default btn-block btn-add-attr" type="button">+</button></th></tr>
                 </table>
+                <label>备注:</label>
+                <textarea class="form-control" cols="20" rows="5" name="new_product[memo][1]"></textarea>
             </td>
             </tr>            
         </table>
@@ -497,7 +505,7 @@ if($i%2==1){
             <div class="row">
                 <div class="col-lg-3">公司:</div>
                 <div class="col-lg-9"><input class="form-control" type="text" name="delivery_company" value="<?php echo $order_info['delivery_company']?>" placeholder="公司" readonly /></div>
-            </div>      
+            </div>
             <div class="row">
                 <div class="col-lg-3">街道1:</div>
                 <div class="col-lg-9"><input class="form-control" type="text" name="delivery_street_address" value="<?php echo $order_info['delivery_street_address']?>" placeholder="街道1" readonly /></div>

@@ -690,7 +690,7 @@ class OrderController extends CommonController {
                         'add_from_sys'=>1
                     );
                     M('orders_products')->add($data);
-                    M('orders_products_remark')->add(array('site_id'=>$site_id, 'orders_id'=>$order_id, 'orders_products_id'=>$max_orders_products_id,'remove'=>0, 'remark'=>''));                        
+                    M('orders_products_remark')->add(array('site_id'=>$site_id, 'orders_id'=>$order_id, 'orders_products_id'=>$max_orders_products_id,'remove'=>0, 'remark'=>$new_product['memo'][$k]));#memo 备注
                     foreach($new_product['attr'][$k]['option_name'] as $kk=>$option_name){
                         $option_value = $new_product['attr'][$k]['option_value'][$kk];
                         if(empty($option_name) || empty($option_value)) continue;

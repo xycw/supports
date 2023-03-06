@@ -30,11 +30,17 @@
 			</td>
 		</tr>
 		<tr>
-			<th>货运单号<span style="color:red;">*</span></th>
-			<td>
-				<input class="form-control" type="text" name="delivery_tracking_no" required="required" placeholder="请扫描货运单号的条形码或者输入货运单号">
-			</td>
-		</tr>
+            <th>货运单号<span style="color:red;">*</span></th>
+            <?php if ($order_info['indvance_no']) { ?>
+                <td><input class="form-control" type="text" name="delivery_tracking_no" required="required"
+                           value="<?php echo $order_info['indvance_no']; ?>"
+                </td>
+            <?php } else {
+                ?>
+                <td><input class="form-control" type="text" name="delivery_tracking_no" required="required"
+                           placeholder="请扫描货运单号的条形码或者输入货运单号"></td>
+            <?php } ?>
+        </tr>
 		<tr>
 			<th>重量<span style="color:red;">*</span></th>
 			<td>

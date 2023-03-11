@@ -1674,10 +1674,10 @@ class PurchaseController extends CommonController {
 
             }
             if (!empty($data['indvance_no']) && !empty($data['order_no'])) {
-                $id = M('orders_remark')->where(array('order_no' => $data['order_no']))->save(array('indvance_no' => $data['indvance_no']));
-                if ($id == 0) {
+                M('orders_remark')->where(array('order_no' => $data['order_no']))->save(array('indvance_no' => $data['indvance_no']));
+                /*if ($id == 0) {
                     $this->error('导入失败,数据有问题,检查订单或预发订单');
-                }
+                }*/
                 $num++;
             }
             if ($num == 0) {
